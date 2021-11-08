@@ -1,20 +1,20 @@
 package com.example.todolist
 
 import androidx.lifecycle.ViewModel
+import com.example.todolist.database.TaskRepository
 
 class TaskListViewModel:ViewModel() {
+    val taskRepository=TaskRepository.get()
 
-    val tasks= mutableListOf<Task>()
+    val liveDataTasks=taskRepository.getAllTask()
 
-    init {
+    fun addTask(task: Task){
 
-        for (i in 0..25){
-
-            val task =Task()
-            task.title="the title is $i"
-            task.isCheack =i % 2 == 0
-            tasks.add(task)
-
-        }
+        taskRepository.addTask(task)
     }
+    fun saveUpdate(task: Task){
+
+        taskRepository.updateTask(task)
+    }
+
 }
