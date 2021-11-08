@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 
 
@@ -19,9 +20,11 @@ class FragmentTask : Fragment() {
     private lateinit var dueDate:Button
     private lateinit var addTask:Button
     private lateinit var task: Task
+    private lateinit var isCheackBox:CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        task= Task()
 
 
     }
@@ -38,6 +41,7 @@ class FragmentTask : Fragment() {
         dateBtn=view.findViewById(R.id.task_date)
         dueDate=view.findViewById(R.id.due_date)
         addTask=view.findViewById(R.id.add_task)
+        isCheackBox=view.findViewById(R.id.isCheaked)
         dateBtn.apply {
 
             text=task.date.toString()
@@ -60,13 +64,21 @@ class FragmentTask : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
+             task.title=s.toString()
+                task.description=s.toString()
             }
 
             override fun afterTextChanged(s: Editable?) {
 
             }
         }
+        titleOfTask.addTextChangedListener(textWatcher)
+        description.addTextChangedListener(textWatcher)
+        isCheackBox.setOnCheckedChangeListener { _, isChecked ->
+            task.isCheack=isChecked
+
+        }
+
     }
 }
 

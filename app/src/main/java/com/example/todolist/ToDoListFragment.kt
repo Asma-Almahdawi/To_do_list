@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+const val KEY_ID="myTaskId"
 class ToDoListFragment : Fragment() {
 
     private lateinit var listRecyclerView:RecyclerView
@@ -35,16 +35,19 @@ class ToDoListFragment : Fragment() {
          updateUI()
         return view
     }
-    private fun updateUI() { //this finalll
+    private fun updateUI() {
         val taskAdapter = TaskAdapter(taskListViewModel.tasks)
         Log.d("ASMA", "the item count is : ${taskAdapter.itemCount}")
         listRecyclerView.adapter = taskAdapter
     }
-    private inner class TaskHolder(view: View):RecyclerView.ViewHolder(view){
+    private inner class TaskHolder(view: View):RecyclerView.ViewHolder(view),View.OnClickListener{
         private lateinit var task: Task
         private var titleTask:TextView=itemView.findViewById(R.id.task_title)
         private var dueDateView:TextView=itemView.findViewById(R.id.due_date_view)
         private var isCeakedView:ImageView=itemView.findViewById(R.id.is_cheack)
+        init {
+         itemView.setOnClickListener  (this)
+        }
 
         fun bind(task:Task) {
             this.task = task
@@ -61,6 +64,23 @@ class ToDoListFragment : Fragment() {
 
         }
 
+        override fun onClick(v: View?) {
+            if (v == itemView){
+                val args=Bundle()
+                args.putSerializable(KEY_ID,task.id)
+                val fragment=FragmentTask()
+                fragment.arguments=args
+                activity?.let {
+                    it.supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainerView,fragment)
+                        .addToBackStack(null)
+                        .commit()
+                    Log.d("ASAMA","NO")
+                }
+
+            }
+        }
 
 
     }
@@ -72,7 +92,7 @@ class ToDoListFragment : Fragment() {
                 R.layout.list_item_task,
                 parent,
                 false
-            )//parent like conteier
+            )
 
             return TaskHolder(view)
 
