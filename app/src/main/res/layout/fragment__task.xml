@@ -27,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteHeight="5548dp"
         tools:layout_conversion_absoluteWidth="210dp" />
 
     <LinearLayout
@@ -50,6 +50,8 @@
             android:id="@+id/des_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:layout_marginVertical="40dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="30dp"

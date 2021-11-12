@@ -61,6 +61,7 @@ private val fragmentViewModel by lazy { ViewModelProvider(this).get(TaskFragment
             if(isChecked) {
                 task.priority = 2
                 fragmentViewModel.saveUpdate(task)
+
             }
         }
 //        isLessCheckBox.setOnClickListener {

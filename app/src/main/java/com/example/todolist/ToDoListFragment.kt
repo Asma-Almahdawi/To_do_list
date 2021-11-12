@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.*
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
@@ -96,11 +97,12 @@ class ToDoListFragment : Fragment() {
         private var dueDateView:TextView=itemView.findViewById(R.id.due_date_view)
         private var isCheckedView:CheckBox=itemView.findViewById(R.id.is_cheack_v)
         private val overDueDate:TextView=itemView.findViewById(R.id.over_dueDate)
-        private var checkPriority:ImageView=itemView.findViewById(R.id.check_priority)
+        private var checkPriority:Button=itemView.findViewById(R.id.check_priority)
 
         init {
          itemView.setOnClickListener  (this)
         }
+
 
         val dateFormat="yyyy-MM-dd"
         fun bind(task:Task) {
@@ -109,10 +111,15 @@ class ToDoListFragment : Fragment() {
 
 
 
+           when(task.priority){
+
+               0->checkPriority.setBackgroundColor(resources.getColor(R.color.purple_200))
+               1->checkPriority.setBackgroundColor(resources.getColor(R.color.purple_500))
+               2->checkPriority.setBackgroundColor(resources.getColor(R.color.pink))
+
+           }
 
             val currentDate=Date()
-
-
 
             if (task.dueDate !=null){
                 dueDateView.text=DateFormat.format(dateFormat,task.dueDate)
@@ -127,6 +134,9 @@ class ToDoListFragment : Fragment() {
             }else{
                 dueDateView.text = ""
             }
+
+
+
 
 
      isCheckedView.isChecked=task.isCompetled
