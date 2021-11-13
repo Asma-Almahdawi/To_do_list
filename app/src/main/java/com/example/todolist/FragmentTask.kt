@@ -76,7 +76,8 @@ private val fragmentViewModel by lazy { ViewModelProvider(this).get(TaskFragment
         isNormalCheackBox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
             task.priority=1
-            fragmentViewModel.saveUpdate(task)}
+            fragmentViewModel.saveUpdate(task)
+            }
         }
 
         isHighCheackBox.setOnCheckedChangeListener { _, isChecked ->
