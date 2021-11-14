@@ -70,13 +70,33 @@ private val fragmentViewModel by lazy { ViewModelProvider(this).get(TaskFragment
 //            fragmentViewModel.saveUpdate(task)
 //        }
 
+isNormalCheackBox.setOnClickListener {
+
+    isNormalCheackBox.isChecked=true
+    isHighCheackBox.isChecked=false
+    isLessCheckBox.isChecked=false
+
+}
+
+        isHighCheackBox.setOnClickListener {
+            isNormalCheackBox.isChecked=false
+            isHighCheackBox.isChecked=true
+            isLessCheckBox.isChecked=false
+
+        }
+
+        isLessCheckBox.setOnClickListener {
+            isNormalCheackBox.isChecked=false
+            isHighCheackBox.isChecked=false
+            isLessCheckBox.isChecked=true
+        }
 
 
 
         isNormalCheackBox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked){
-            task.priority=1
-            fragmentViewModel.saveUpdate(task)
+            if (isChecked) {
+                task.priority = 1
+                fragmentViewModel.saveUpdate(task)
             }
         }
 
